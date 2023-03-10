@@ -39,7 +39,7 @@
         				</ul>
      				</li>
      				<li>
-     					<span th:if="${user.sex eq 'Female'}"><a href='menstrualCycle.jsp'>Menstrual Cycle</a></span>
+     					<span th:if="${user.sex eq 'f'}"><a href='menstrualCycle.jsp'>Menstrual Cycle</a></span>
      				</li>
         			<li><a href="scheduleBuilder.jsp">Schedule Builder</a></li>
        				<li><a href="charts&Progress.jsp">Charts & Progress</a></li>
@@ -47,12 +47,13 @@
       			</ul>
       			<ul class="nav navbar-nav navbar-right">
         			<li>
-        				<span th:if="${user ne null}"><a href='#'>${user.username}</a></span>
-        				<span th:unless="${user eq null}"><a href='signUp.jsp'><span class='glyphicon glyphicon-user'></span> Sign Up</a></span>
+        				<span th:if="${user.username ne null}"><a href=# th:text=${user.username}></a></span>
+        				<span th:if="${user.username eq null}"><a href='signUp.jsp'><span class='glyphicon glyphicon-user'></span> Sign Up</a></span>
         			</li>
         			<li>
-        				<span th:if="${user ne null}"><form method='POST' action='http://localhost:8080/Healthy-Life-Git/logout.html'><input type='submit' value='Log Out'/></form></span>
-        				<span th:unless="${user eq null}"></span>
+        				<span th:if="${user.username ne null}"><a href='logout'><span class='glyphicon glyphicon-log-out'></span> Logout</a></span>
+        				<span th:if="${user.username eq null}"><a href='login'><span class='glyphicon glyphicon-log-in'></span> Login</a></span>
+        			</li>
       			</ul>
     		</div>
   		</div>

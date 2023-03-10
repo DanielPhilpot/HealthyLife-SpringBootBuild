@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<title>Login</title>
+
+<div th:include="StandardImports.html"></div>
+
+<script type="text/javascript">
+	function validateForm() {
+		let username = document.getElementById("username").value;
+		let password = document.getElementById("password").value;
+		if (username == "") {
+			UMessage = "Username is Required; ";
+		}
+		if (password == "") {
+			PMessage = "Password is Required; ";
+		}
+		if (UMessage != "" || PMessage != ""){
+			alert(UMessage + PMessage);
+			UMessage = "";
+			PMessage = "";
+			return false;
+		} 
+		document.getElementById('loginForm').submit();
+	}
+</script>
+
+</head>
+<body>
+	<div th:include="nav-top.html"></div>
+	
+	<div style="text-align: center;">
+		<h1>Login to Healthy Life</h1>
+		<br>
+		<form action="/Userlogin" id="loginForm" method="POST" onsubmit="validateForm()">
+		<table class="center">
+			<tbody>
+				<tr class="loginRow">
+					<td>Username</td>
+					<td><input type="text" id="username" name="username"></td>
+				</tr>
+				<tr class="loginRow">
+					<td>Password</td>
+					<td><input type="password" id="password" name="password"></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<p><input type="hidden" value="Login"/></p>
+		<p><button type="button" onClick="validateForm()">Login</button>
+		</form>
+	</div>
+</body>
+</html>
