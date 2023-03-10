@@ -30,6 +30,7 @@ public class controller {
 		
 		ModelAndView model = new ModelAndView("welcome");
 		model.addObject("user", session.getAttribute("user"));
+		model.addObject("welcomeMessage", "Welcome back " + currentUser.getUsername());
 		return model;
 	}
 	@RequestMapping("/login")
@@ -50,6 +51,8 @@ public class controller {
 		
 		ModelAndView model = new ModelAndView("welcome");
 		model.addObject("user", session.getAttribute("user"));
+		currentUser = (UserEntity) session.getAttribute("user");
+		model.addObject("welcomeMessage", "Welcome back " + currentUser.getUsername());
 		return model;
 	}	
 	@RequestMapping("/logout")

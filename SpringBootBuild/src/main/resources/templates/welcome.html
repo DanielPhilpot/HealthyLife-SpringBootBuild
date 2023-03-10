@@ -12,8 +12,8 @@
 	
 	<div class="container">
 		<h1>The Healthy Life Portal</h1>
-		<h3>${welcomeMessage}</h3>
-		<h1>another header</h1>
+		<span th:if="${user.username ne null}"><h3 th:text=${welcomeMessage}></h3></span>
+		<span th:if="${user.username eq null}"><h3>Welcome to the Healthy Life Portal!</h3></span>
 		
 		
 		
