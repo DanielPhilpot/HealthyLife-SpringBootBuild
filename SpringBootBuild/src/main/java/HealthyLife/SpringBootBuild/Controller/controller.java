@@ -67,6 +67,34 @@ public class controller {
 		model.addObject("user", session.getAttribute("user"));
 		return model;
 	}	
+	@RequestMapping("/signup")
+	public ModelAndView signupPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		ModelAndView model = new ModelAndView("signUp");
+		model.addObject("user", session.getAttribute("user"));
+		return model;
+	}
+	@RequestMapping("/UserSignUp")
+	public ModelAndView signup(HttpServletRequest request,HttpServletResponse response, @RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("sex") String sex) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		if(sex.equals("Male")) {
+			sex = "m";
+		} else {
+			sex = "f";
+		}
+		
+		userService.createUser(username, password, sex, session);
+		
+		ModelAndView model = new ModelAndView("welcome");
+		model.addObject("user", session.getAttribute("user"));
+		currentUser = (UserEntity) session.getAttribute("user");
+		model.addObject("welcomeMessage", "Welcome back " + currentUser.getUsername());
+		return model;
+	}	
 	
 	
 	

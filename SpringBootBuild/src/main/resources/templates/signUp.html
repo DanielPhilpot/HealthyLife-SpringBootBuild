@@ -4,7 +4,7 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-<title>Login</title>
+<title>Sign Up</title>
 
 <div th:include="StandardImports.html"></div>
 
@@ -12,30 +12,37 @@
 	function validateForm() {
 		let username = document.getElementById("username").value;
 		let password = document.getElementById("password").value;
+		let sex = document.getElementById("sex").value;
 		if (username == "") {
 			UMessage = "Username is Required; ";
 		}
 		if (password == "") {
 			PMessage = "Password is Required; ";
 		}
-		if (UMessage != "" || PMessage != ""){
-			alert(UMessage + PMessage);
+		if (sex == "Select") {
+			SMessage = "Sex is Required; ";
+		}
+		if (UMessage != "" || PMessage != "" || SMessage != ""){
+			alert(UMessage + PMessage + SMessage);
 			UMessage = "";
 			PMessage = "";
+			SMessage = "";
+			
 			return false;
-		} 
-		document.getElementById('loginForm').submit();
+		}
+		document.getElementById('signUpForm').submit();
 	}
 </script>
 
 </head>
 <body>
 	<div th:include="nav-top.html"></div>
+
 	
 	<div style="text-align: center;">
-		<h1>Login to Healthy Life</h1>
+		<h1>Sign up to Healthy Life</h1>
 		<br>
-		<form action="/Userlogin" id="loginForm" method="POST" onsubmit="validateForm()">
+		<form action="/UserSignUp" id="signUpForm" method="POST" onsubmit="validateForm()">
 		<table class="center">
 			<tbody>
 				<tr class="loginRow">
@@ -46,11 +53,20 @@
 					<td>Password</td>
 					<td><input type="password" id="password" name="password"></td>
 				</tr>
+				<tr class="loginRow">
+					<td>Sex</td>
+					<td>
+						<select id="sex" name="sex">
+							<option>Select</option>
+							<option>Male</option>
+							<option>Female</option>
+						</select>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<br>
-		<p><input type="hidden" value="Login"/></p>
-		<p><button type="button" onClick="validateForm()">Login</button></p>
+		<p><button type="button" onClick="validateForm()">Sign Up</button></p>
 		</form>
 	</div>
 </body>

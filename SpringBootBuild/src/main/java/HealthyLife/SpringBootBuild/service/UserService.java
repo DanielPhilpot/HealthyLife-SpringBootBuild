@@ -38,6 +38,25 @@ public class UserService {
 		}
 	}
 	
+	public boolean createUser(String username, String password, String sex, HttpSession session) {
+		UserEntity newUser = new UserEntity();
+		newUser.setUsername(username);
+		newUser.setPassword(password);
+		newUser.setSex(sex);
+		
+		try {
+		userRepository.save(newUser);
+		session.setAttribute("user", newUser);
+		System.out.println("ACCOUNT CREATION SUCESS");
+		}
+		catch(Exception e) {
+			System.out.println("ACCOUNT CREATION FAILED");
+		}
+		
+		
+		return true;
+	}
+	
 	
 	
 	
