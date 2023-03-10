@@ -48,7 +48,7 @@
       			<ul class="nav navbar-nav navbar-right">
         			<li>
         				<span th:if="${user.username ne null}"><a href=# th:text=${user.username}></a></span>
-        				<span th:if="${user.username eq null}"><a href='signUp.jsp'><span class='glyphicon glyphicon-user'></span> Sign Up</a></span>
+        				<span th:if="${user.username eq null}"><a href='/signup'><span class='glyphicon glyphicon-user'></span> Sign Up</a></span>
         			</li>
         			<li>
         				<span th:if="${user.username ne null}"><a href='logout'><span class='glyphicon glyphicon-log-out'></span> Logout</a></span>
