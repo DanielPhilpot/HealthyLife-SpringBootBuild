@@ -8,6 +8,16 @@
 
 <div th:include="StandardImports.html"></div>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BDX8VRDFSM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BDX8VRDFSM');
+</script>
+
 <script type="text/javascript">
 	function validateForm() {
 		let username = document.getElementById("username").value;
