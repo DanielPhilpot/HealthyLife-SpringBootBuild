@@ -14,7 +14,7 @@ public class ScheduleItemEntity {
 	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="username", length=20, nullable=false, unique=true)
+	@Column(name="username", length=20, nullable=false)
 	private String username;
 	
 	@Column (name="itemtype", length=9)

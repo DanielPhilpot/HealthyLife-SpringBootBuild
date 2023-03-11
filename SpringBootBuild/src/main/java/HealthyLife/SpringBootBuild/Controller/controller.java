@@ -191,7 +191,16 @@ public class controller {
 	}
 	@RequestMapping("/recordMeal")
 	public ModelAndView recordMealPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+			
+		HttpSession session = this.setSessionInfo(request, response);
 		
+		ModelAndView model = new ModelAndView("recordMeal");
+		model.addObject("user", session.getAttribute("user"));
+		return model;
+	}
+	@RequestMapping("/submitMeal")
+	public ModelAndView submitMeal(HttpServletRequest request,HttpServletResponse response, @RequestParam(value = "mealTitle", required = false) String mealTitle, @RequestParam(value = "mealDesc", required = false) String mealDesc, @RequestParam(value = "mealDate", required = false) String mealDate, @RequestParam(value = "mealTime", required = false) String mealTime, @RequestParam(value = "mealLoc", required = false) String location, @RequestParam(value = "type", required = false) String type, @RequestParam(value = "mealWeight", required = false) Integer mealWeight, @RequestParam(value = "mealCal", required = false) Integer mealCal, @RequestParam(value = "f&v") Integer fv, @RequestParam(value = "carb") Integer carb, @RequestParam(value = "protein") Integer protein, @RequestParam(value = "dairy") Integer dairy, @RequestParam(value = "o&s") Integer os, @RequestParam(value = "jF") Integer junk) throws Exception {
+			
 		//TBD
 		
 		HttpSession session = this.setSessionInfo(request, response);
