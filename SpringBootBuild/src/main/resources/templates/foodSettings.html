@@ -121,98 +121,56 @@
   			<div class="col-sm-6">
   				<h3>Dietary Requirements</h3>
   				<br>
-  				<form method="POST" action="http://localhost:8080/Healthy-Life-Git/setDietReq.html" onsubmit="return validateForm()">
+  				<form action="/setDietReqs" id="setDietReqs" method="POST">
   					<table>
   						<tbody>
   							<tr class="loginRow">	
   								<td>Vegetarian</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isVegiterian}">
-  											<input type='checkbox' id='Vegetarian' name='Vegetarian' value='V' checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type='checkbox' id='Vegetarian' name='Vegetarian' value='V'>
-  										</c:otherwise>
-  									</c:choose>							
+  									<span th:if="${vegiterian ne null}"><input type='checkbox' id='Vegetarian' name='Vegetarian' value='V' checked></span>
+  									<span th:if="${vegiterian eq null}"><input type='checkbox' id='Vegetarian' name='Vegetarian' value='V'></span>						
   								</td>
   							</tr>
   							<tr class="loginRow">	
   								<td>Vegan</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isVegan}">
-  											<input type="checkbox" id="Vegan" name="Vegan" value="VV" checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type="checkbox" id="Vegan" name="Vegan" value="VV">
-  										</c:otherwise>
-  									</c:choose>  									
+  									<span th:if="${vegan ne null}"><input type="checkbox" id="Vegan" name="Vegan" value="VV" checked></span>
+  									<span th:if="${vegan eq null}"><input type="checkbox" id="Vegan" name="Vegan" value="VV"></span>						
   								</td>
   							</tr>
   							<tr class="loginRow">	
   								<td>Lactose Intolerance</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isLactoseInt}">
-  											<input type="checkbox" id="LacInt" name="LacInt" value="L" checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type="checkbox" id="LacInt" name="LacInt" value="L">	
-  										</c:otherwise>
-  									</c:choose>  
-  								</td>								
+  									<span th:if="${lactoseInt ne null}"><input type="checkbox" id="LacInt" name="LacInt" value="L" checked></span>
+  									<span th:if="${lactoseInt eq null}"><input type="checkbox" id="LacInt" name="LacInt" value="L"></span>						
+  								</td>							
   							</tr>
   							<tr class="loginRow">	
   								<td>Gluten Intolerance</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isGlutenInt}">
-  											<input type="checkbox" id="GlucInt" name="GlucInt" value="G" checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type="checkbox" id="GlucInt" name="GlucInt" value="G">
-  										</c:otherwise>
-  									</c:choose>  									
-  								</td>					
+  									<span th:if="${glutenInt ne null}"><input type="checkbox" id="GlucInt" name="GlucInt" value="G" checked></span>
+  									<span th:if="${glutenInt eq null}"><input type="checkbox" id="GlucInt" name="GlucInt" value="G"></span>						
+  								</td>				
   							</tr>
   							<tr class="loginRow">	
   								<td>Nut Allergy</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isNutAlerg}">
-  											<input type="checkbox" id="NutAlg" name="NutAlg" value="N" checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type="checkbox" id="NutAlg" name="NutAlg" value="N">
-  										</c:otherwise>
-  									</c:choose>  									
-  								</td>	
+  									<span th:if="${nutAlerg ne null}"><input type="checkbox" id="NutAlg" name="NutAlg" value="N" checked></span>
+  									<span th:if="${nutAlerg eq null}"><input type="checkbox" id="NutAlg" name="NutAlg" value="N"></span>						
+  								</td>
   							</tr>
   							<tr class="loginRow">	
   								<td>Kosher</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isKosher}">
-  											<input type="checkbox" id="Kosher" name="Kosher" value="K" checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type="checkbox" id="Kosher" name="Kosher" value="K">
-  										</c:otherwise>
-  									</c:choose>  									
-  								</td>  								
+  									<span th:if="${kosher ne null}"><input type="checkbox" id="Kosher" name="Kosher" value="K" checked></span>
+  									<span th:if="${kosher eq null}"><input type="checkbox" id="Kosher" name="Kosher" value="K"></span>						
+  								</td>							
   							</tr>
   							<tr class="loginRow">	
   								<td>Halal</td>
   								<td>
-  									<c:choose>
-  										<c:when test="${user.isHalal}">
-  											<input type="checkbox" id="Halal" name="Halal" value="H" checked>
-  										</c:when>
-  										<c:otherwise>
-  											<input type="checkbox" id="Halal" name="Halal" value="H">
-  										</c:otherwise>
-  									</c:choose>  									
+  									<span th:if="${halal ne null}"><input type="checkbox" id="Halal" name="Halal" value="H" checked></span>
+  									<span th:if="${halal eq null}"><input type="checkbox" id="Halal" name="Halal" value="H"></span>						
   								</td>
   							</tr>
   						</tbody>

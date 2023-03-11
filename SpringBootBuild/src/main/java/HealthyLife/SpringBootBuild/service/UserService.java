@@ -60,5 +60,17 @@ public class UserService {
 		return true;
 	}	
 	
+	public void setDietReqs(String dietReqs, UserEntity user) {
+		user.setDietReqs(dietReqs);
+		
+		try {
+			userRepository.save(user);
+			System.out.println("USER UPDATE SUCESS");
+		}
+		catch(Exception e) {
+			System.out.println("USER UPDATE FAILED");
+		}
+	}
+	
 	
 }

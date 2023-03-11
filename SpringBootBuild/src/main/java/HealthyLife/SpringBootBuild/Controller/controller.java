@@ -107,10 +107,18 @@ public class controller {
 		HttpSession session = this.setSessionInfo(request, response);
 		
 		scheduleItemService.getUserSchedule(currentUser.getUsername(), session);
+		this.addDietaryReqs(session);
 		
 		ModelAndView model = new ModelAndView("foodSettings");
 		model.addObject("user", session.getAttribute("user"));
 		model.addObject("schedule", session.getAttribute("schedule"));
+		if(session.getAttribute("isVegiterian") == "yes") {model.addObject("vegiterian", "yes");}
+		if(session.getAttribute("isVegan") == "yes") {model.addObject("vegan", "yes");}
+		if(session.getAttribute("isLactoseInt") == "yes") {model.addObject("lactoseInt", "yes");}
+		if(session.getAttribute("isGlutenInt") == "yes") {model.addObject("glutenInt", "yes");}
+		if(session.getAttribute("isNutAlerg") == "yes") {model.addObject("nutAlerg", "yes");}
+		if(session.getAttribute("isKosher") == "yes") {model.addObject("kosher", "yes");}
+		if(session.getAttribute("isHalal") == "yes") {model.addObject("halal", "yes");}
 		return model;
 	}
 	@RequestMapping("/addMeal")
@@ -142,10 +150,49 @@ public class controller {
 		ModelAndView model = new ModelAndView("foodSettings");
 		model.addObject("user", session.getAttribute("user"));
 		model.addObject("schedule", session.getAttribute("schedule"));
+		if(session.getAttribute("isVegiterian") == "yes") {model.addObject("vegiterian", "yes");}
+		if(session.getAttribute("isVegan") == "yes") {model.addObject("vegan", "yes");}
+		if(session.getAttribute("isLactoseInt") == "yes") {model.addObject("lactoseInt", "yes");}
+		if(session.getAttribute("isGlutenInt") == "yes") {model.addObject("glutenInt", "yes");}
+		if(session.getAttribute("isNutAlerg") == "yes") {model.addObject("nutAlerg", "yes");}
+		if(session.getAttribute("isKosher") == "yes") {model.addObject("kosher", "yes");}
+		if(session.getAttribute("isHalal") == "yes") {model.addObject("halal", "yes");}
+		return model;
+	}
+	@RequestMapping("/setDietReqs")
+	public ModelAndView setDietReqs(HttpServletRequest request,HttpServletResponse response, @RequestParam(value = "Vegetarian", required = false) String vegeterian, @RequestParam(value = "Vegan", required = false) String vegan, @RequestParam(value = "LacInt", required = false) String LacInt, @RequestParam(value = "GlucInt", required = false) String GlucInt, @RequestParam(value = "NutAlg", required = false) String NutAlg, @RequestParam(value = "Kosher", required = false) String Kosher, @RequestParam(value = "Halal", required = false) String Halal) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		String reqs = "";
+		if(vegeterian != null){reqs += vegeterian+",";}
+		if(vegan != null){reqs += vegan+",";}
+		if(LacInt != null){reqs += LacInt+",";}
+		if(GlucInt != null){reqs += GlucInt+",";}
+		if(NutAlg != null){reqs += NutAlg+",";}
+		if(Kosher != null){reqs += Kosher+",";}
+		if(Halal != null){reqs += Halal;}
+		
+		System.out.println(reqs);		
+		userService.setDietReqs(reqs, currentUser);
+		
+		ModelAndView model = new ModelAndView("foodSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		this.addDietaryReqs(session);
+		if(session.getAttribute("isVegiterian") == "yes") {model.addObject("vegiterian", "yes");}
+		if(session.getAttribute("isVegan") == "yes") {model.addObject("vegan", "yes");}
+		if(session.getAttribute("isLactoseInt") == "yes") {model.addObject("lactoseInt", "yes");}
+		if(session.getAttribute("isGlutenInt") == "yes") {model.addObject("glutenInt", "yes");}
+		if(session.getAttribute("isNutAlerg") == "yes") {model.addObject("nutAlerg", "yes");}
+		if(session.getAttribute("isKosher") == "yes") {model.addObject("kosher", "yes");}
+		if(session.getAttribute("isHalal") == "yes") {model.addObject("halal", "yes");}
 		return model;
 	}
 	@RequestMapping("/recordMeal")
 	public ModelAndView recordMealPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		//TBD
 		
 		HttpSession session = this.setSessionInfo(request, response);
 		
@@ -155,6 +202,8 @@ public class controller {
 	}
 	@RequestMapping("/mealHistory")
 	public ModelAndView mealHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		//TBD
 		
 		HttpSession session = this.setSessionInfo(request, response);
 		
@@ -184,6 +233,48 @@ public class controller {
 		System.out.println("Gender Test = " + currentUser.getSex());
 		System.out.println(currentUser.getUsername());
 		return session;
+	}
+	
+	public void addDietaryReqs(HttpSession session) {
+		String reqs = currentUser.getDietRqs();
+		
+		session.setAttribute("isVegiterian", "no");
+		session.setAttribute("isVegan", "no");	
+		session.setAttribute("isLactoseInt", "no");
+		session.setAttribute("isGlutenInt", "no");
+		session.setAttribute("isNutAlerg", "no");
+		session.setAttribute("isKosher", "no");
+		session.setAttribute("isHalal", "no");
+		
+		String dietReqs[] = new String[7];
+		
+		dietReqs = reqs.split(",");	
+		
+		for(int i = 0; i < dietReqs.length; i++) {
+			switch(dietReqs[i]) {
+				case "V":
+					session.setAttribute("isVegiterian", "yes");
+					break;
+				case "VV":
+					session.setAttribute("isVegan", "yes");			
+					break;
+				case "L":
+					session.setAttribute("isLactoseInt", "yes");
+					break;
+				case "G":
+					session.setAttribute("isGlutenInt", "yes");
+					break;
+				case "N":
+					session.setAttribute("isNutAlerg", "yes");
+					break;
+				case "K":
+					session.setAttribute("isKosher", "yes");
+					break;
+				case "H":
+					session.setAttribute("isHalal", "yes");
+					break;
+			}
+		}
 	}
 	
 }
