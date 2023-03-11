@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import HealthyLife.SpringBootBuild.service.EventService;
+import HealthyLife.SpringBootBuild.service.MealService;
 import HealthyLife.SpringBootBuild.service.ScheduleItemService;
-//import HealthyLife.SpringBootBuild.Model.User;
 import HealthyLife.SpringBootBuild.service.UserService;
 import HealthyLife.SpringBootBuild.Model.UserEntity;
 
@@ -28,6 +30,12 @@ public class controller {
 	
 	@Autowired
 	private ScheduleItemService scheduleItemService;
+	
+	@Autowired
+	private EventService eventService;
+	
+	@Autowired
+	private MealService mealService;
 	
 	@RequestMapping("/")
 	public ModelAndView welcomePage(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -205,7 +213,16 @@ public class controller {
 		
 		HttpSession session = this.setSessionInfo(request, response);
 		
-		ModelAndView model = new ModelAndView("recordMeal");
+		String tempTime = mealDate + " " + mealTime + ":00";
+		System.out.println(tempTime);
+		
+		java.sql.Timestamp dateTime = Timestamp.valueOf(tempTime);
+		
+		Integer eventId =  eventService.createEvent(currentUser.getUsername(), dateTime, "meal");
+		
+		mealService.createMeal(eventId, mealTitle, mealDesc, location, type, mealWeight, mealCal, fv, carb, protein, dairy, os, junk);
+		
+		ModelAndView model = new ModelAndView("mealHistory");
 		model.addObject("user", session.getAttribute("user"));
 		return model;
 	}
