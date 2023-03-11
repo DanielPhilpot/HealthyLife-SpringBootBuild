@@ -23,14 +23,14 @@ public class UserEntity {
 	@Column (name="sex", length=1, nullable=false)
 	private String sex;
 	
-	@Column (name="dietReqs", length=14)
-	private String dietReqs;
+	@Column (name="dietreqs", length=14)
+	private String dietreqs;
 	
-	@Column (name="gymDistance")
-	private Integer gymDistance;
+	@Column (name="gymdistance")
+	private Integer gymdistance;
 	
-	@Column (name="pakrDistance")
-	private Integer parkDistance;
+	@Column (name="pakrdistance")
+	private Integer parkdistance;
 	
 	public Integer getId() {
 		return id;
@@ -61,27 +61,27 @@ public class UserEntity {
 	}
 	
 	public String getDietRqs() {
-		return dietReqs;
+		return dietreqs;
 	}
 	
 	public void setDietReqs(String dietReqs) {
-		this.dietReqs = dietReqs;
+		this.dietreqs = dietReqs;
 	}
 	
 	public int getGymDistance() {
-		return gymDistance;
+		return gymdistance;
 	}
 	
 	public void setGymDistance(Integer gymDistance) {
-		this.gymDistance = gymDistance;
+		this.gymdistance = gymDistance;
 	}
 	
 	public int getParkDistance() {
-		return parkDistance;
+		return parkdistance;
 	}
 	
 	public void setParkDistance(Integer parkDistance) {
-		this.parkDistance = parkDistance;
+		this.parkdistance = parkDistance;
 	}
 }
 

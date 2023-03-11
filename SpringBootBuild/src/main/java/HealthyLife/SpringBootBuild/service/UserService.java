@@ -1,9 +1,13 @@
 package HealthyLife.SpringBootBuild.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import HealthyLife.SpringBootBuild.Model.ScheduleItemEntity;
 import HealthyLife.SpringBootBuild.Model.UserEntity;
+import HealthyLife.SpringBootBuild.repository.ScheduleItemRepository;
 import HealthyLife.SpringBootBuild.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 
@@ -53,12 +57,8 @@ public class UserService {
 			System.out.println("ACCOUNT CREATION FAILED");
 		}
 		
-		
 		return true;
-	}
-	
-	
-	
+	}	
 	
 	
 }

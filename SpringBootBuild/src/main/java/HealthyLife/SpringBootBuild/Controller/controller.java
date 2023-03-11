@@ -4,12 +4,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.sql.Time;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import HealthyLife.SpringBootBuild.service.ScheduleItemService;
 //import HealthyLife.SpringBootBuild.Model.User;
 import HealthyLife.SpringBootBuild.service.UserService;
 import HealthyLife.SpringBootBuild.Model.UserEntity;
@@ -22,6 +25,9 @@ public class controller {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ScheduleItemService scheduleItemService;
 	
 	@RequestMapping("/")
 	public ModelAndView welcomePage(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -95,6 +101,67 @@ public class controller {
 		model.addObject("welcomeMessage", "Welcome back " + currentUser.getUsername());
 		return model;
 	}	
+	@RequestMapping("/foodSettings")
+	public ModelAndView foodSettingsPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		scheduleItemService.getUserSchedule(currentUser.getUsername(), session);
+		
+		ModelAndView model = new ModelAndView("foodSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/addMeal")
+	public ModelAndView addMeal(HttpServletRequest request,HttpServletResponse response, @RequestParam("day") String day, @RequestParam("time") String time, @RequestParam("type") String type, @RequestParam("dur") String dur) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		int dayCode = 0;
+		switch(day) {
+			case "Monday": dayCode = 1; break;
+			case "Tuesday": dayCode = 2; break;
+			case "Wednesday": dayCode = 3; break;
+			case "Thursday": dayCode = 4; break;
+			case "Friday": dayCode = 5; break;
+			case "Saturday": dayCode = 6; break;
+			case "Sunday": dayCode = 7; break;
+		}
+		
+		time += ":00";
+		System.out.println(time);
+		dur += ":00";
+		System.out.println(dur);
+		
+		java.sql.Time NTime = Time.valueOf(time);
+		java.sql.Time NDur = Time.valueOf(dur);
+		
+		scheduleItemService.createScheduleItem(currentUser.getUsername(), "food", type, dayCode, NTime, NDur);
+		
+		ModelAndView model = new ModelAndView("foodSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/recordMeal")
+	public ModelAndView recordMealPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		ModelAndView model = new ModelAndView("recordMeal");
+		model.addObject("user", session.getAttribute("user"));
+		return model;
+	}
+	@RequestMapping("/mealHistory")
+	public ModelAndView mealHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		ModelAndView model = new ModelAndView("mealHistory");
+		model.addObject("user", session.getAttribute("user"));
+		return model;
+	}
 	
 	
 	
@@ -117,6 +184,6 @@ public class controller {
 		System.out.println("Gender Test = " + currentUser.getSex());
 		System.out.println(currentUser.getUsername());
 		return session;
-		
 	}
+	
 }
