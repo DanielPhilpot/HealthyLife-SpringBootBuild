@@ -17,8 +17,6 @@ public class ScheduleItemService {
 	
 	public void getUserSchedule(String username, HttpSession session) {
 		List<ScheduleItemEntity> userSchedule = scheduleItemRepo.findByusername(username);
-		//System.out.println(userSchedule.get(0).getSnackOrLocation());
-		//System.out.println(userSchedule.get(1).getSnackOrLocation());
 		session.setAttribute("schedule", userSchedule);
 	}
 	

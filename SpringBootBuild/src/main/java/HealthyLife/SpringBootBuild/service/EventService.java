@@ -30,7 +30,10 @@ public class EventService {
 			System.out.println("EVENT CREATION FAILED");
 			return 0;
 		}
-		
-
+	}
+	
+	public void getUserEvents(String username, HttpSession session) {
+		List<EventEntity> userEvents = EventRepo.findByusername(username);
+		session.setAttribute("events", userEvents);
 	}
 }

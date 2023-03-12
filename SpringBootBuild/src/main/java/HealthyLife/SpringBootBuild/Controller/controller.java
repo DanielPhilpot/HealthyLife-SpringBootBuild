@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import HealthyLife.SpringBootBuild.service.MealService;
 import HealthyLife.SpringBootBuild.service.ScheduleItemService;
 import HealthyLife.SpringBootBuild.service.UserService;
 import HealthyLife.SpringBootBuild.Model.UserEntity;
+import HealthyLife.SpringBootBuild.Model.EventEntity;
 
 
 @Controller
@@ -208,8 +210,6 @@ public class controller {
 	}
 	@RequestMapping("/submitMeal")
 	public ModelAndView submitMeal(HttpServletRequest request,HttpServletResponse response, @RequestParam(value = "mealTitle", required = false) String mealTitle, @RequestParam(value = "mealDesc", required = false) String mealDesc, @RequestParam(value = "mealDate", required = false) String mealDate, @RequestParam(value = "mealTime", required = false) String mealTime, @RequestParam(value = "mealLoc", required = false) String location, @RequestParam(value = "type", required = false) String type, @RequestParam(value = "mealWeight", required = false) Integer mealWeight, @RequestParam(value = "mealCal", required = false) Integer mealCal, @RequestParam(value = "f&v") Integer fv, @RequestParam(value = "carb") Integer carb, @RequestParam(value = "protein") Integer protein, @RequestParam(value = "dairy") Integer dairy, @RequestParam(value = "o&s") Integer os, @RequestParam(value = "jF") Integer junk) throws Exception {
-			
-		//TBD
 		
 		HttpSession session = this.setSessionInfo(request, response);
 		
@@ -220,7 +220,7 @@ public class controller {
 		
 		Integer eventId =  eventService.createEvent(currentUser.getUsername(), dateTime, "meal");
 		
-		mealService.createMeal(eventId, mealTitle, mealDesc, location, type, mealWeight, mealCal, fv, carb, protein, dairy, os, junk);
+		mealService.createMeal(eventId,currentUser.getUsername(), mealTitle, mealDesc, location, type, mealWeight, mealCal, fv, carb, protein, dairy, os, junk);
 		
 		ModelAndView model = new ModelAndView("mealHistory");
 		model.addObject("user", session.getAttribute("user"));
@@ -229,12 +229,14 @@ public class controller {
 	@RequestMapping("/mealHistory")
 	public ModelAndView mealHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
-		//TBD
-		
 		HttpSession session = this.setSessionInfo(request, response);
+		
+		eventService.getUserEvents(currentUser.getUsername(), session);
+		mealService.getUserMeals(currentUser.getUsername(),session);
 		
 		ModelAndView model = new ModelAndView("mealHistory");
 		model.addObject("user", session.getAttribute("user"));
+		model.addObject("userMeals", session.getAttribute("userMeals"));
 		return model;
 	}
 	

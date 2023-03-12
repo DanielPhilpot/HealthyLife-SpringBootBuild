@@ -23,9 +23,7 @@
 	
 		<table border="1">
 			<tr>
-				<th>Event Id</th>
 				<th>Title</th>
-				<th>Date and Time</th>
 				<th>Description</th>
 				<th>Location</th>
 				<th>Meal Type</th>
@@ -39,23 +37,20 @@
 				<th>Junk Food % </th>
 			</tr>
 			
-			<c:set scope="page" var="count" value="1"/>
-			<c:forEach var="meal" items="${user.meals}">
+			<span th:each="meal : ${userMeals}">
 				<tr>
-					<td><c:out value="${meal.value.eventId}"/></td>
-					<td><c:out value="${meal.value.title}"/></td>
-					<td><c:out value="${meal.value.eventDateTime}"/></td>
-					<td><c:out value="${meal.value.description}"/></td>
-					<td><c:out value="${meal.value.location}"/></td>
-					<td><c:out value="${meal.value.mealType}"/></td>
-					<td><c:out value="${meal.value.weight}"/></td>
-					<td><c:out value="${meal.value.calories}"/></td>
-					<td><c:out value="${meal.value.fv}"/></td>
-					<td><c:out value="${meal.value.carbs}"/></td>
-					<td><c:out value="${meal.value.protein}"/></td>
-					<td><c:out value="${meal.value.dairy}"/></td>
-					<td><c:out value="${meal.value.oils}"/></td>
-					<td><c:out value="${meal.value.junk}"/></td>
+					<td th:text="${meal.title}"/>
+					<td th:text="${meal.description}"/>
+					<td th:text="${meal.location}"/>
+					<td th:text="${meal.mealType}"/>
+					<td th:text="${meal.weight}"/>
+					<td th:text="${meal.calories}"/>
+					<td th:text="${meal.fv}"/>
+					<td th:text="${meal.carbs}"/>
+					<td th:text="${meal.protein}"/>
+					<td th:text="${meal.dairy}"/>
+					<td th:text="${meal.oil}"/>
+					<td th:text="${meal.junk}"/>
 				</tr>
 				<c:set var="count" value="${count+1}"/>
 			</c:forEach>

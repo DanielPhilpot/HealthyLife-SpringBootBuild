@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import HealthyLife.SpringBootBuild.Model.MealEntity;
 
 public interface MealRepository extends JpaRepository<MealEntity, Integer>{
-	List<MealEntity> findByeventid(Integer id);
+	List<MealEntity> findByusername(String name);
 }

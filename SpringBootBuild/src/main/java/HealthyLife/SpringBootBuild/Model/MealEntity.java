@@ -17,6 +17,9 @@ public class MealEntity {
 	@Column(name="eventid", nullable=false)
 	private Integer eventid;
 	
+	@Column(name="username", length=20, nullable=false)
+	private String username;
+	
 	@Column(name="title", length=30)
 	private String title;
 	
@@ -63,6 +66,14 @@ public class MealEntity {
 	
 	public void setEventId(Integer eventId) {
 		this.eventid = eventId;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	public String getTitle() {
@@ -113,7 +124,7 @@ public class MealEntity {
 		this.calories = calories;
 	} 
 	
-	public Integer getFV() {
+	public Integer getFv() {
 		return fv;
 	}
 	
