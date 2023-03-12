@@ -239,7 +239,153 @@ public class controller {
 		model.addObject("userMeals", session.getAttribute("userMeals"));
 		return model;
 	}
-	
+	@RequestMapping("/exerciseSettings")
+	public ModelAndView exerciseSettingsPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		scheduleItemService.getUserSchedule(currentUser.getUsername(), session);
+		
+		ModelAndView model = new ModelAndView("exerciseSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/addExercise")
+	public ModelAndView addExercise(HttpServletRequest request,HttpServletResponse response, @RequestParam("day") String day, @RequestParam("time") String time, @RequestParam("location") String type, @RequestParam("dur") String dur) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		int dayCode = 0;
+		switch(day) {
+			case "Monday": dayCode = 1; break;
+			case "Tuesday": dayCode = 2; break;
+			case "Wednesday": dayCode = 3; break;
+			case "Thursday": dayCode = 4; break;
+			case "Friday": dayCode = 5; break;
+			case "Saturday": dayCode = 6; break;
+			case "Sunday": dayCode = 7; break;
+		}
+		
+		time += ":00";
+		System.out.println(time);
+		dur += ":00";
+		System.out.println(dur);
+		
+		java.sql.Time NTime = Time.valueOf(time);
+		java.sql.Time NDur = Time.valueOf(dur);
+		
+		scheduleItemService.createScheduleItem(currentUser.getUsername(), "exercise", type, dayCode, NTime, NDur);
+		
+		ModelAndView model = new ModelAndView("exerciseSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/recordExercise")
+	public ModelAndView exercisePage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		ModelAndView model = new ModelAndView("recordExercise");
+		model.addObject("user", session.getAttribute("user"));
+		return model;
+	}
+	@RequestMapping("/exerciseHistory")
+	public ModelAndView exerciseHistory(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		ModelAndView model = new ModelAndView("exerciseHistory");
+		model.addObject("user", session.getAttribute("user"));
+		return model;
+	}
+	@RequestMapping("/scheduleBuilder")
+	public ModelAndView scheduleBuilder(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		scheduleItemService.getUserSchedule(currentUser.getUsername(), session);
+		
+		ModelAndView model = new ModelAndView("scheduleBuilder");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/w&sSettings")
+	public ModelAndView wsSettings(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		scheduleItemService.getUserSchedule(currentUser.getUsername(), session);
+		
+		ModelAndView model = new ModelAndView("w&sSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/addSleep")
+	public ModelAndView addSleep(HttpServletRequest request,HttpServletResponse response, @RequestParam("day") String day, @RequestParam("time") String time, @RequestParam("dur") String dur) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		int dayCode = 0;
+		switch(day) {
+			case "Monday": dayCode = 1; break;
+			case "Tuesday": dayCode = 2; break;
+			case "Wednesday": dayCode = 3; break;
+			case "Thursday": dayCode = 4; break;
+			case "Friday": dayCode = 5; break;
+			case "Saturday": dayCode = 6; break;
+			case "Sunday": dayCode = 7; break;
+		}
+		
+		time += ":00";
+		System.out.println(time);
+		dur += ":00";
+		System.out.println(dur);
+		
+		java.sql.Time NTime = Time.valueOf(time);
+		java.sql.Time NDur = Time.valueOf(dur);
+		
+		scheduleItemService.createScheduleItem(currentUser.getUsername(), "worksleep", "Sleep", dayCode, NTime, NDur);
+		
+		ModelAndView model = new ModelAndView("w&sSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
+	@RequestMapping("/addWork")
+	public ModelAndView addWork(HttpServletRequest request,HttpServletResponse response, @RequestParam("day") String day, @RequestParam("time") String time, @RequestParam("dur") String dur) throws Exception {
+		
+		HttpSession session = this.setSessionInfo(request, response);
+		
+		int dayCode = 0;
+		switch(day) {
+			case "Monday": dayCode = 1; break;
+			case "Tuesday": dayCode = 2; break;
+			case "Wednesday": dayCode = 3; break;
+			case "Thursday": dayCode = 4; break;
+			case "Friday": dayCode = 5; break;
+			case "Saturday": dayCode = 6; break;
+			case "Sunday": dayCode = 7; break;
+		}
+		
+		time += ":00";
+		System.out.println(time);
+		dur += ":00";
+		System.out.println(dur);
+		
+		java.sql.Time NTime = Time.valueOf(time);
+		java.sql.Time NDur = Time.valueOf(dur);
+		
+		scheduleItemService.createScheduleItem(currentUser.getUsername(), "worksleep", "Work", dayCode, NTime, NDur);
+		
+		ModelAndView model = new ModelAndView("w&sSettings");
+		model.addObject("user", session.getAttribute("user"));
+		model.addObject("schedule", session.getAttribute("schedule"));
+		return model;
+	}
 	
 	
 	

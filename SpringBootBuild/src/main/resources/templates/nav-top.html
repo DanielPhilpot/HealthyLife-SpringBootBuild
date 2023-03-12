@@ -24,26 +24,26 @@
         				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Exercise
         				<span class="caret"></span></a>
        	 				<ul class="dropdown-menu">
-          					<li><a href="exerciseSettings.jsp">Exercise Settings</a></li>
-          					<li><a href="recordExercise.jsp">Record Exercise</a></li>
-          					<li><a href="exerciseHistory.jsp">Exercise History</a></li>
+          					<li><a href="/exerciseSettings">Exercise Settings</a></li>
+          					<li><a href="/recordExercise">Record Exercise</a></li>
+          					<li><a href="/exerciseHistory">Exercise History</a></li>
         				</ul>
      				</li>
      				<li class="dropdown">
         				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Work & Sleep
         				<span class="caret"></span></a>
        	 				<ul class="dropdown-menu">
-          					<li><a href="w&sSettings.jsp">Work & Sleep Settings</a></li>
-          					<li><a href="recordW&s.jsp">Record Work & Sleep</a></li>
-          					<li><a href="w&sHistory.jsp">Work & Sleep History</a></li>
+          					<li><a href="/w&sSettings">Work & Sleep Settings</a></li>
+          					<li><a href="/exerciseHistory">Record Work & Sleep</a></li>
+          					<li><a href="/exerciseHistory">Work & Sleep History</a></li>
         				</ul>
      				</li>
      				<li>
-     					<span th:if="${user.sex eq 'f'}"><a href='menstrualCycle.jsp'>Menstrual Cycle</a></span>
+     					<span th:if="${user.sex eq 'f'}"><a href='/exerciseHistory	'>Menstrual Cycle</a></span>
      				</li>
-        			<li><a href="scheduleBuilder.jsp">Schedule Builder</a></li>
-       				<li><a href="charts&Progress.jsp">Charts & Progress</a></li>
-        			<li><a href="recommended.jsp">Recommended</a></li>
+        			<li><a href="/scheduleBuilder">Schedule Builder</a></li>
+       				<li><a href="/exerciseHistory">Charts & Progress</a></li>
+        			<li><a href="/exerciseHistory">Recommended</a></li>
       			</ul>
       			<ul class="nav navbar-nav navbar-right">
         			<li>

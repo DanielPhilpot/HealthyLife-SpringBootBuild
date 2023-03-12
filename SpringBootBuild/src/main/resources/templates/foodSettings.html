@@ -50,7 +50,7 @@
   			<div class="col-sm-4">
   				<h3 >Add a meal to schedule</h3>
   				<br>
-  				<form action="addMeal" id="addMeal" method="POST"  onsubmit="validateAddActivity()">
+  				<form action="/addMeal" id="addMeal" method="POST"  onsubmit="validateAddActivity()">
   					<table>
   						<tbody>
   							<tr class="loginRow">
@@ -102,17 +102,16 @@
   				<h3>Meal Schedule</h3>
   				<table border="1">
   					<tr>
+  						<th>Day Code</th>
   						<th>Time</th>
   						<th>Duration</th>
   						<th>Type</th>
   					</tr>
-  					<tr>
-  						<th>Monday</th>
-  					</tr>
-  					
+
 					<span th:each="scheduleItem : ${schedule}">
 						<span th:if="${scheduleItem.itemType eq 'food'}">
 							<tr>
+								<td th:text="${scheduleItem.day}"/>
 								<td th:text="${scheduleItem.time}"/>
 								<td th:text="${scheduleItem.duration}"/>
 								<td th:text="${scheduleItem.snackOrLocation}"/>

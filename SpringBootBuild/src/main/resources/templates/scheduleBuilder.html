@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BDX8VRDFSM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BDX8VRDFSM');
+</script>
+
+<meta charset="ISO-8859-1">
+<title>Schedule Builder</title>
+
+<div th:include="StandardImports.html"></div>
+
+
+</head>
+<body>
+	<div th:include="nav-top.html"></div>
+	
+	<div class="container">
+		<h1>Schedule Builder</h1>
+        
+        <div id="display">
+        	<table border="1">
+  					<tr>
+  						<th>Day Code</th>
+  						<th>Time</th>
+  						<th>Duration</th>
+  						<th>Type</th>
+  					</tr>
+  					<span th:each="scheduleItem : ${schedule}">
+							<tr>
+								<td th:text="${scheduleItem.day}"/>
+								<td th:text="${scheduleItem.time}"/>
+								<td th:text="${scheduleItem.duration}"/>
+								<td th:text="${scheduleItem.itemType}"/>
+							</tr>
+					</span>
+  				
+  				</table>
+        </div>
+        
+	</div>
+</body>
+</html>
